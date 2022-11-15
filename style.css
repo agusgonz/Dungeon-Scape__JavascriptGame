@@ -1,0 +1,108 @@
+/* Paleta de colores */
+:root{
+    --black: #000000;
+    --blue: #14213D;
+    --orange: #FCA311;
+    --grey: #E5E5E5;
+    --white: #FFFFFF;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 62.5%;
+    text-align: center;
+    font-family: 'Marhey';
+}
+.body{
+    background-color: var(--orange);
+    overflow-x: hidden;
+}
+/* .MainContainer{
+
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem; 
+} */
+.Canvas{
+    display: inline-block;
+    width: 32rem;
+    height: 32rem;
+    margin: 3rem 0;
+    background-color: var(--white);
+    border-radius: 10px;
+    border: 2px solid var(--blue);
+}
+.MainTitle{
+    padding-top: 1rem;
+    font-size: 4.5rem;
+    color: var(--blue);
+    border-bottom: 2px solid var(--blue);
+}
+
+.ButtonsGrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: "1 up 2"
+                         "left 3 right"
+                         "4 down 5";
+    gap: 1rem;
+}
+.ControllsContainer{
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+.ButtonController{
+    all: unset;
+    font-size: 3rem;
+    color: var(--blue);
+    padding: 0.5rem;
+    border: 2px solid var(--blue);
+    border-radius: 20px;
+    background-color: var(--white);
+
+    transition: all .05s ease-in-out;
+}
+.ButtonController:active{
+    background-color: #14213D;
+    color: var(--white);
+
+    transform: scale(0.9);
+}
+.ButtonController--up{
+    grid-area: up;
+}
+.ButtonController--left{
+    grid-area: left;
+}
+.ButtonController--right{
+    grid-area: right;
+}
+.ButtonController--down{
+    grid-area: down;
+}
+.ControllsContainer--desktop{
+    display: none;
+}
+.StatsContainer{
+    margin: 5rem 0;
+    color: var(--blue);
+}
+.StatsTitle{
+    font-size: 3rem;
+}
+@media screen and (min-width:420px) {
+    .Canvas{
+        width: 38rem;
+        height: 38rem;
+    }
+    .ButtonController{
+        padding: 1.2rem;
+
+    }
+}
