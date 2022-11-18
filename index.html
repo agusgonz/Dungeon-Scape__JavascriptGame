@@ -16,30 +16,32 @@
     <!-- Scripts -->
     <script src="maps.js" defer></script>
     <script src="game.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
 <body class="body">
     <h1 class="MainTitle">Dungeon Scape</h1>
     <div class="MainContainer">
         <div class="ControllsContainer ControllsContainer--desktop">
             <div class="ButtonsGrid--tablet">
-                <button class="ButtonController ButtonController--up">Up</button>
-                <button class="ButtonController ButtonController--down">Down</button>
+                <button class="ButtonController ButtonController--up" id="upTablet">Up</button>
+                <button class="ButtonController ButtonController--down" id="downTablet">Down</button>
             </div>
         </div>
 
-            <canvas class="Canvas"></canvas>
+            <canvas class="Canvas" id="game"></canvas>
 
         <div class="ControllsContainer">
             <div class="ButtonsGrid">
-                <button class="ButtonController ButtonController--up ButtonController--upTablet">Up</button>
-                <button class="ButtonController ButtonController--down ButtonController--downTablet">Down</button>
-                <button class="ButtonController ButtonController--left">Left</button>
-                <button class="ButtonController ButtonController--right">Right</button>
+                <button class="ButtonController ButtonController--up ButtonController--upTablet" id="up">Up</button>
+                <button class="ButtonController ButtonController--down ButtonController--downTablet" id="down">Down</button>
+                <button class="ButtonController ButtonController--left" id="left">Left</button>
+                <button class="ButtonController ButtonController--right" id="right">Right</button>
             </div>
         </div>
     </div>
     <div class="StatsContainer">
-        <p class="StatsTitle">Stats:</p>
+
+        <p class="StatsTitle">Level 1</p>
         <p class="HearthsAvailable">Stats</p>
         <p class="Points">Stats</p>
     </div>
