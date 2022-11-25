@@ -67,7 +67,9 @@ class Player{
         this.objectHittedX
         this.objectHittedY
         
-        this.coins = 0
+        this.coins
+
+        this.skin
     }
 
     Draw(){
@@ -76,7 +78,7 @@ class Player{
             this.y = this.spawnY
         }
         c.font = elementsSize * .95 + "px Verdana" 
-        c.fillText(emojis["PLAYER"], this.x, this.y)
+        c.fillText(playerEmojis[this.skin], this.x, this.y)
     }
 
     Move(){
@@ -106,8 +108,14 @@ class Player{
         }
     }
 
+    GoBack(){
+        PreviusLevel()
+    }
     GetCoin(){
-        mapRowCols[this.objectHittedX][this.objectHittedY] = "-"
+        // mapRowCols[this.objectHittedX][this.objectHittedY] = "-"
+        coinFound(this.objectHittedX, this.objectHittedY)
+        this.coins++
+        console.log(this.coins)
 
     }
     DirectionToMove(direction){
@@ -147,6 +155,7 @@ class Player{
             break
             case "O":
                 this.Move()
+                this.GoBack()
             break
             case "I":
                 this.Move()
@@ -162,17 +171,53 @@ class Player{
             break
             case undefined:
             break
+            case "H":
+                this.Move()
+            break
         }
     }
 }
-let player = new Player
+let player = new Player()
 player.isAlive = true
+player.skin = 01
+
+let obstacleSkin = 01
+//Customisation---------------------------------
+function GetSkin__Player(emoji){
+    player.skin = emoji
+    displayCanvas()
+}
+function GetSkin__Obstacle(emoji){
+    obstacleSkin = emoji
+    displayCanvas()
+}
+//Player
+//Coins-----------------------------------------
+class Coins{
+    constructor(x, y){
+        this.x = x
+        this.y = y
+    }
+}
+function coinFound(x, y){
+    if(coinsArray.some(coin => coin.x == x && coin.y == y)){
+        console.log("ya esta")
+        return
+    }
+
+    coinsArray.push(new Coins(x, y))
+}
+
+let coinsArray = []
 
 //Game------------------------------------------
 let mapIndex = 0;
 let map = maps[mapIndex];
 let mapRows
 let mapRowCols
+
+let isPreviusLevel = false
+
 SplitMap()
 
 function StartGame(){
@@ -190,29 +235,43 @@ function NextLevel(){
     map = maps[mapIndex]
     LoadLevel()
 }
+function PreviusLevel(){
+    if(mapIndex == 0) return
+    isPreviusLevel = true
+    mapIndex--
+    map = maps[mapIndex]
+    LoadLevel()
+}
 
 //Canvas----------------------------------------
+function SplitMap(){
+    mapRows = map.trim().split("\n")
+    mapRowCols = mapRows.map(row => row.trim().split(""))
+}
 function resizeCanvas(){
 
     if(window.innerWidth < 500){
         canvasSize = 255
     }
-    if(window.innerWidth >= 500){
+    if(window.innerWidth >= 400){
         canvasSize = 300
+    }
+    if(window.innerWidth >= 500){
+        canvasSize = 350
 
-        isOnTablet(false)
+        // isOnTablet(false)
     }
     if(window.innerWidth >= 750){
-        canvasSize = 300
+        canvasSize = 400
 
-        isOnTablet(true)
+        // isOnTablet(true)
     }
     if(window.innerWidth >= 900){
-        canvasSize = 400
+        canvasSize = 500
 
     }
     if(window.innerWidth >= 1300){
-        canvasSize = 500
+        canvasSize = 600
     }
 
     canvas.setAttribute("width", canvasSize)
@@ -222,41 +281,69 @@ function resizeCanvas(){
 
     LoadLevel()
 }
-
-
 function displayCanvas(){
 
     c.clearRect(0, 0, canvas.width, canvas.height);
     c.font = elementsSize + "px Verdana" 
 
-    mapRowCols.forEach((row, rowI) => {
-        row.forEach((col, colI) => {
-            const emoji = emojis[col]
-            const posX = elementsSize * colI
-            const posY = elementsSize * (rowI + 1)
+    mapRowCols.some((row, rowIndex) => {
+        row.some((col, colIndex) => {
 
-            if(col == "O" && player.x == undefined){
+            let emoji = emojis[col]
+            const posX = elementsSize * colIndex
+            const posY = elementsSize * (rowIndex + 1)
+            
+            if(col == "C" && coinsArray.some(coin => coin.x == rowIndex && coin.y == colIndex)){
+                mapRowCols[rowIndex][colIndex] = "-"
+                return
+            }
+
+            if(isPreviusLevel && col == "I" && player.x == undefined){
+                player.spawnX = posX;
+                player.spawnY = posY;
+                isPreviusLevel = false
+            }
+
+            if(col == "O" && player.x == undefined || col == "H" && player.x == undefined){
                 player.spawnX = posX;
                 player.spawnY = posY;
             }
 
+            if(col == "X"){
+                emoji = obstacleEmojis[obstacleSkin]
+            }
+
             c.fillText(emoji, posX, posY)
+
+
         })
     })
 
     player.Draw()
 }
-function SplitMap(){
-    mapRows = map.trim().split("\n")
-    mapRowCols = mapRows.map(row => row.trim().split(""))
-}
+
+
 //Extras----------------------------------------
 window.addEventListener("keydown", function(e) {
     if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
         e.preventDefault();
     }
 }, false);
+//WebInteraction--------------------------------
+let shopBar = document.getElementById("ShopBar")
+let shopItems = document.getElementById("ShopItems")
+shopBar.addEventListener("click", ToggleBar)
 
+function ToggleBar(){
+    if(shopItems.style.display == "none"){
+        shopItems.style.display = "inline-block"
+        shopBar.classList.toggle("Shop__TitleCointainer--hidden")
+    } else{
+        shopItems.style.display = "none"
+        shopBar.classList.toggle("Shop__TitleCointainer--hidden")
+    }
+    console.log("A")
+}
 //Guardas-------------------------------------
 // const timer = ms => new Promise(res => setTimeout(res, ms))
 // async MoveAnimation(){

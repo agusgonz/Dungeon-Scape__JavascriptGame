@@ -1,25 +1,41 @@
 const emojis = {
-    '-': ' ',
-    'O': '🚪',
-    'X': '💣',
-    'I': '🎁',
-    "C": "🪙",
-    'PLAYER': '💀',
-    'BOMB_COLLISION': '🔥',
-    'GAME_OVER': '👎',
-    'WIN': '🏆',
+  '-': ' ',
+  "H": "🪦",
+  'X': '💣',
+  'O': '🚪',
+  'I': '🚪',
+  'L': '🔒',
+  "C": "🪙",
+  'PLAYER': '💀',
+  'BOMB_COLLISION': '🔥',
+  'GAME_OVER': '👎',
+  'WIN': '🏆',
 };
+const playerEmojis = {
+  01 : "💀",
+  02 : "⚽",
+  03 : "🐱",
+  04 : "🕷️",
+  05 : "♟️",
+}
+const obstacleEmojis = {
+  01 : "💣",
+  02 : "🥅",
+  03 : "🧨",
+  04 : "👽",
+  05 : "🦞",
+}
 const maps = [];
 maps.push(`
   XXXXXXXXXX
   XXXXXXXXXX
   XXXXXXXXXX
-  XXXXXXXXXX
-  O--------I
-  XXXXXXXXXX
-  XXXXXXXXXX
-  XXXXXXXXXX
-  XXXXXXXXXX
+  ----------
+  H--------I
+  ----------
+  XXXXXLXXXX
+  XXXXX---XX
+  XXXXXXX--I
   XXXXXXXXXX
 `);
 maps.push(`

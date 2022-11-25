@@ -20,10 +20,13 @@ html{
     background-color: var(--orange);
     overflow-x: hidden;
 }
+.MainContainer{
+    padding-top: 4rem;
+}
 .Canvas{
     display: inline-block;
 
-    margin: 3rem 0;
+    margin: 2rem 0;
     background-color: var(--white);
     border-radius: 10px;
     border: 2px solid var(--blue);
@@ -33,27 +36,31 @@ html{
     font-size: 4.5rem;
     color: var(--blue);
     border-bottom: 2px solid var(--blue);
+    display: none;
 }
 
 .ButtonsGrid{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-auto-rows: 7rem;
     grid-template-areas: "1 up 2"
-                         "left 3 right"
+                         "left s right"
                          "4 down 5";
-    gap: 1rem;
+    gap: -1rem;
+    align-content: center;
+    justify-content: center;
 }
 .ControllsContainer{
-    max-width: 40rem;
+    width: 21rem;
+    height: 21rem;
     margin: 0 auto;
-    padding: 0 2rem;
+    /* display: none; */
 }
 .ButtonController{
     all: unset;
-    font-size: 3rem;
+    font-size: 1.5rem;
     color: var(--blue);
-    padding: 0.5rem;
+    /* padding: 1rem; */
     border: 2px solid var(--blue);
     border-radius: 20px;
     background-color: var(--white);
@@ -69,29 +76,202 @@ html{
 }
 .ButtonController--up{
     grid-area: up;
+
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
 }
 .ButtonController--left{
     grid-area: left;
+
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
 }
 .ButtonController--right{
     grid-area: right;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+
 }
 .ButtonController--down{
     grid-area: down;
+
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
 }
 .ControllsContainer--desktop{
     display: none;
 }
-.StatsContainer{
-    margin: 5rem 0;
+/* Shop */
+.Shop{
+    width: 26rem;
+    margin: 2rem auto;
+    user-select: none;
+
+}
+
+.Shop__TitleCointainer{
+    width: inherit;
+    border: 2px solid var(--blue);
+    background-color: var(--white);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /* border-bottom-right-radius: 10px; */
+}
+.Shop__TitleCointainer--hidden{
+    border-radius: 20rem;
+    transition: all 0.1s ease-in-out;
+}
+.Shop__TitleCointainer--hidden:active{
+    transform: scale(0.99);
+
+}
+.Shop__MainTitle{
+    display: inline-block;
+    width: 65%;
+    border-right: 2px solid var(--blue);
+}
+.Shop__Title{
+    text-align: left;
+    font-size: 2rem;
+    color: var(--blue);
+    font-weight: 400;
+    padding-left: 1rem;
+}
+.Shop__CoinsContainer{
+    display: inline-block;
+    width: 20%;
+    height: 100%;
+}
+.Shop__CoinsText{
+    font-size: 1.8rem;
     color: var(--blue);
 }
-.StatsTitle{
-    font-size: 3rem;
+
+.Shop__ItemsCointainer{
+    width: inherit;
+    height: 20rem;
+    background-color: var(--white);
+    border-bottom: 2px solid var(--blue);
+    border-left: 2px solid var(--blue);
+    border-right: 2px solid var(--blue);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
-@media screen and (min-width:420px) {
-    .ButtonController{
-        padding: 1.2rem;
+.Shop__ItemsText{
+    color: var(--blue);
+    padding-top: 0.2rem;
+    padding-left: 1rem;
+    font-weight: 300;
+    text-align: left;
+}
+.Shop__ItemsGrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-auto-rows: 6rem;
+
+    border-top: 2px dashed var(--blue);
+    border-bottom: 2px dashed var(--blue);
+}
+.Shop__button{
+    all: unset;
+    font-size: 3rem;
+
+    /* border-right: 2px dashed var(--blue); */
+}
+
+.Shop__button:active{
+    transform: scale(1.1);
+}
+
+.Shop__button:nth-child(5){
+    border-right: none;
+}
+
+.footer{
+    position: fixed;
+    bottom: 0.3rem;
+    right: 2rem;
+}
+.footer__text{
+    display: inline-block;
+    font-size: 1.3rem;
+    color: var(--blue);
+    font-family: "Roboto";
+}
+
+/* Media Queries */
+@media screen and (min-width:400px) {
+
+    .Shop{
+        width: 30rem;
+    }
+}
+@media screen and (min-width:500px) {
+    .ButtonsGrid{
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-auto-rows: 8rem;
 
     }
+    .ControllsContainer{
+        width: 24rem;
+        height: 24rem;
+
+    }
+    .Shop{
+        width: 35rem;
+    }
+}
+
+@media screen and (min-width:750px) {
+    .MainTitle{
+        padding-top: 1rem;
+        font-size: 5.5rem;
+    }
+    .ButtonsGrid{
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-auto-rows: 10rem;
+
+    }
+    .ControllsContainer{
+        width: 30rem;
+        height: 30rem;
+
+    }
+    .ButtonController{
+        font-size: 2rem;
+    }
+    .Shop{
+        width: 40rem;
+    }
+    .Shop__Title{
+        font-size: 2.5rem;
+    }
+    .Shop__CoinsText{
+        font-size: 2rem;
+
+    }
+    
+}
+@media screen and (min-width:900px) {
+    .Shop{
+        width: 50rem;
+    }
+}
+@media screen and (min-width:1000px) {
+    .ControllsContainer{
+        display: none;
+    }
+}
+
+
+::-webkit-scrollbar
+{
+	width: 13px;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: var(--white);
+	border: 2px solid var(--blue);
+    border-radius: 10px;
 }
